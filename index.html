@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Images</title>
+    <link rel ="stylesheet" href ="style.css">
+        <link rel = "icon" type= "image/webp" href ="./OIP.jpg">
+</head>
+<body>
+    <h1>Carousel of Images</h1>
+
+    <video id="videoPlayer" width="500px" controls muted loop style= "display:none;" >
+        <source id="videoSource" type="video/mp4">
+    </video>
+
+    <a href = "https://www.delftstack.com/howto/javascript/javascript-array-of-images/">Learn about Array of Images
+        <img id = "img" src = "inicio.jpg" alt = "randomImage" style="display: block;">
+    </a>
+
+    <div id="buttonContainer">
+        <p><button type = "button" onclick = "back()">Back</button></p> 
+        <p id = "nameImg"></p>
+        <p><button type = "button" onclick = "next()">Next</button></p>
+    </div>
+    
+    <footer>
+        <hr>
+        <p>Author name: Danilo Russo</p>
+        <a href = "mailto:danilorusso.info94@gmail.com">Contact me</a>
+    </footer>
+    
+    <script>
+        const IMG = document.getElementById("img");
+        const NAME = document.getElementById("nameImg");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const videoSource = document.getElementById("videoSource");
+
+        const ROUTE = "./"
+
+        const images = ["inicio.jpg", "barcelona.jpg", "paris.jpg", "newyork.jpg", "londres.jpg" ];
+
+        let position = 0;
+
+        function next(){
+            position++
+            if (position >= images.length) {
+                alert("This is the last image");
+                videoSource.src = "./gandalf.mp4";
+                IMG.style.display = "none";
+                videoPlayer.style.display = "block";
+                videoPlayer.load();
+                videoPlayer.play();
+                position--;
+            } else
+                showImage();
+        }
+
+        function showImage(){
+                let image = ROUTE + images[position];
+                IMG.src = image;
+                NAME.innerHTML = image;
+
+                IMG.style.display = "block";
+                videoPlayer.style.display = "none";
+                videoPlayer.pause();
+                videoSource.src = "";
+            }
+
+        function back(){
+            position--
+            if (position < 0) {
+                alert("This is the first image");
+                videoSource.src = "./gandalf.mp4";
+                IMG.style.display = "none";
+                videoPlayer.style.display = "block";
+                videoPlayer.load();
+                videoPlayer.play();
+                position++;
+            } else
+                showImage();
+        }
+
+
+
+    </script>
+</body>
+</html>
